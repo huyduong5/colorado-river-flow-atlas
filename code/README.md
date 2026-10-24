@@ -36,6 +36,9 @@ Không commit `.venv/`, `node_modules/`, `dist/`, cache.
 .venv/bin/python -m colorado_flow.pipeline --stage evaluate
 .venv/bin/python -m colorado_flow.pipeline --stage export
 
+Stage `export` sinh cả báo cáo ngắn trong `latex/` và bộ asset báo cáo đầy đủ
+trong `latex_full/` (bảng, hình, số liệu và manifest).
+
 # Tests
 .venv/bin/python -m pytest -q
 ```

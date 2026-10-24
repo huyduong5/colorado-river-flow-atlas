@@ -13,7 +13,7 @@ from .audit import run_audit
 from .datasets import build_datasets
 from .descriptive import run_descriptive
 from .evaluation import run_evaluation
-from .export_latex import export_latex
+from .export_latex_full import export_latex_full
 from .export_web import export_web
 from .extremes import run_extremes
 from .features import load_feature_frame, run_features, split_masks
@@ -175,7 +175,7 @@ def run_all(cfg: dict[str, Any]) -> None:
 
     _log("export web + latex")
     export_web(cfg, manifest)
-    export_latex(cfg, manifest)
+    export_latex_full(cfg, manifest)
     _log("done")
 
 
@@ -231,7 +231,7 @@ def main(argv: list[str] | None = None) -> int:
         run_evaluation(cfg, frame, manifest["run_id"], q1, q2)
     elif args.stage == "export":
         export_web(cfg, manifest)
-        export_latex(cfg, manifest)
+        export_latex_full(cfg, manifest)
     return 0
 
 

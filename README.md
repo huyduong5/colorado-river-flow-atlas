@@ -36,7 +36,8 @@ ungdungtuan2/
   README.md                # tệp này
   TASKS.md                 # trạng thái công việc
   code/                    # pipeline Python, config, tests, website
-  latex/                   # source báo cáo, hình, bảng
+  latex/                   # source báo cáo ngắn, hình, bảng
+  latex_full/              # bảng, hình và số liệu cho báo cáo đầy đủ
   deliverables/            # PDF, ZIP, checksum
 ```
 
@@ -87,8 +88,17 @@ Mã nguồn công khai: https://github.com/huyduong5/colorado-river-flow-atlas
 
 ## Báo cáo PDF
 
-PDF hiện tại dài đúng 5 trang, được biên dịch bằng XeLaTeX (Tectonic local). Source
-trong `latex/` có thể upload Overleaf; xem `latex/README_OVERLEAF.md`.
+Bản nộp hiện tại dài đúng 5 trang, được biên dịch bằng XeLaTeX (Tectonic local).
+Source trong `latex/` có thể upload Overleaf; xem `latex/README_OVERLEAF.md`.
+
+Bộ asset cho báo cáo đầy đủ 40–45 trang nằm trong `latex_full/`:
+
+- `tables/`: 14 bảng sinh tự động.
+- `figures/`: 14 hình PDF.
+- `generated/numbers.tex`: số liệu và tham số.
+- `generated/assets_manifest.json`: manifest run ID, bảng và hình.
+
+Chạy `python -m colorado_flow.pipeline --stage export` để tái tạo toàn bộ asset.
 
 ## Giới hạn
 

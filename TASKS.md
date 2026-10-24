@@ -39,6 +39,9 @@ hoàn tất nếu chưa có tệp/kết quả kiểm chứng.
 | P12.1 | Tạo GitHub public | Hoàn tất | https://github.com/huyduong5/colorado-river-flow-atlas |
 | P12.2 | GitHub Actions deploy Pages | Hoàn tất | `.github/workflows/deploy-pages.yml`; run 40113065315 pass |
 | P12.3 | QR website và GitHub | Hoàn tất | `latex/assets/qr_website.png`, `latex/assets/qr_github.png` |
+| P13.1 | Sinh bảng/hình báo cáo đầy đủ | Hoàn tất | `latex_full/tables/` (14 bảng), `latex_full/figures/` (14 hình), `latex_full/generated/assets_manifest.json` |
+| P13.2 | Tích hợp export full vào pipeline | Hoàn tất | `export_latex_full.py`; `--stage export` sinh cả `latex/` và `latex_full/` |
+| P13.3 | Kiểm tra asset compile | Hoàn tất | Tectonic compile bộ asset 5 trang; 15 Python test pass; ảnh PNG đã kiểm tra |
 
 ## Ghi chú
 
