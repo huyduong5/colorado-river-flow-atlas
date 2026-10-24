@@ -1,0 +1,103 @@
+\section{Thảo luận}
+\label{sec:discussion}
+
+\subsection{Điều gì quyết định kết quả?}
+
+Kết quả nổi bật nhất của báo cáo không phải là một mô hình có RMSE thấp, mà là việc
+một baseline đơn giản như Naive persistence lại khó bị đánh bại. Điều này không quá
+ngạc nhiên nếu nhìn vào ACF: lưu lượng hôm nay tương quan rất mạnh với lưu lượng
+những ngày trước, và mức nền thay đổi chậm. Trong một chuỗi như vậy, phần lớn thông
+tin dự báo ngắn hạn nằm ở giá trị gần nhất; mô hình học máy chỉ có thể cải thiện nếu
+nó học được phần thay đổi nhỏ vượt trên tính dai dẳng.
+
+LightGBM được thiết kế với mục tiêu delta để tận dụng chính tính dai dẳng này. Nếu
+mô hình dự báo delta bằng 0, nó trở thành Naive; nếu dự báo delta khác 0, nó cố gắng
+cải thiện. Trên Validation và Test, các delta học được có ích ở một số thời điểm
+nhưng không đủ để tạo ra cải thiện tổng thể. Kết quả là LightGBM gần như trùng Naive
+ở D+1--D+3 và kém hơn một chút ở D+5--D+7. Đây là một kết quả \emph{âm tính có ý
+nghĩa}: nó cho thấy mô hình phức tạp không tự động tốt hơn trong dữ liệu có cấu
+trúc đơn giản.
+
+Các lần thử tham số cũng cho thấy điều tương tự. Tám cấu hình khác nhau cho mean
+RMSE từ 5,57 đến 5,58; khoảng cách quá nhỏ so với độ bất định của hai năm Test. Việc
+tối ưu tham số không phải là nút thắt chính. Nút thắt là thông tin: chuỗi chỉ có
+một biến, không có mưa, nhiệt độ, tuyết tan hay vận hành hồ chứa. Những biến này có
+thể giải thích phần thay đổi mà lag và rolling window không nắm được.
+
+\subsection{So sánh với kỳ vọng và tài liệu}
+
+Trong lý thuyết dự báo chuỗi thời gian, các mô hình đơn giản thường là baseline bắt
+buộc, đặc biệt khi chuỗi có tính dai dẳng cao \cite{hyndman2021}. Kết quả của báo cáo
+phù hợp với nguyên tắc này: trước khi kết luận một mô hình học máy tốt hơn, cần so
+sánh với Naive trên cùng tập đánh giá. Việc báo cáo giữ Naive trong mọi bảng so sánh
+là cần thiết, không phải hình thức.
+
+Seasonal Naive 365 thất bại vì giả định mùa vụ năm ổn định. Phân rã STL cho thấy
+thành phần mùa vụ yếu hơn nhiều so với thành phần xu hướng; ACF ở độ trễ 365 ngày
+còn âm nhẹ. Điều này không có nghĩa là chuỗi không có mùa vụ, mà là mùa vụ không đủ
+mạnh và ổn định để dùng làm dự báo trực tiếp. Khi mức nền thay đổi giữa các năm,
+việc lặp lại cùng ngày năm trước có thể tạo sai số lớn hơn cả một mô hình “không
+học” gì ngoài giá trị gần nhất.
+
+LightGBM là một triển khai gradient boosting hiệu quả \cite{ke2017}; tuy nhiên, sức
+mạnh của nó phụ thuộc vào đặc trưng và dữ liệu. Với 29 đặc trưng nội tại của một
+chuỗi, mô hình có thể học các tương tác phi tuyến nhưng không thể tạo ra thông tin
+mới. Feature importance cho thấy các đặc trưng lịch và lag dài được dùng nhiều; điều
+này hợp lý nhưng cũng cảnh báo rằng mô hình có thể đang học các quy luật mức nền
+thay vì quan hệ nhân quả. Vì vậy không nên diễn giải gain như bằng chứng nhân quả.
+
+\subsection{Giới hạn dữ liệu và thiết kế}
+
+Báo cáo có một số giới hạn cần được nêu rõ:
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Một chuỗi, một trạm:} không thể đánh giá khả năng tổng quát hóa sang
+  trạm khác hoặc sang lưu vực khác.
+  \item \textbf{Không có biến ngoại sinh:} thiếu mưa, nhiệt độ, tuyết tan, bốc hơi
+  và vận hành hồ chứa; đây có thể là phần lớn nguyên nhân của các thay đổi mức nền.
+  \item \textbf{Test ngắn:} chỉ hai năm 2022--2023; kết quả có thể thay đổi nếu chọn
+  giai đoạn Test khác.
+  \item \textbf{Không có cực trị trong Test:} 2022--2023 không có ngày vượt Q95, nên
+  không thể đánh giá khả năng dự báo lũ.
+  \item \textbf{Ngưỡng Q95 toàn mẫu:} ngưỡng được tính trên toàn bộ 2010--2023,
+  không phải ngưỡng trượt; phù hợp mô tả nhưng không phù hợp vận hành.
+  \item \textbf{Không có khoảng bất định:} báo cáo chỉ đưa ra dự báo điểm, không có
+  khoảng tin cậy hoặc phân phối dự báo.
+  \item \textbf{Không có kiểm định ADF/KPSS:} kết luận về tính dừng dựa trên ACF và
+  STL, không dựa trên kiểm định chính thức.
+  \item \textbf{Không có GRU/LSTM:} môi trường không cài PyTorch; báo cáo không đưa
+  ra kết quả cho các mô hình này.
+\end{itemize}
+
+Những giới hạn này không làm kết quả hiện tại mất giá trị, nhưng chúng xác định
+phạm vi diễn giải. Kết quả đúng nhất khi được đọc là: “trong dữ liệu 2010--2023,
+với các đặc trưng nội tại và split đã chọn, LightGBM không vượt Naive”; không phải
+“LightGBM không thể dự báo chuỗi này” hay “không mô hình nào có thể tốt hơn”.
+
+\subsection{Hướng cải thiện}
+
+Có bốn hướng cải thiện tự nhiên. Thứ nhất, bổ sung biến ngoại sinh như mưa, nhiệt
+độ, tuyết tan và thông tin vận hành hồ chứa; đây là hướng có khả năng tạo cải thiện
+lớn nhất. Thứ hai, dùng đánh giá xác suất (quantile regression, conformal prediction)
+để trả lời câu hỏi “dự báo có thể sai bao nhiêu”, thay vì chỉ một con số điểm. Thứ
+ba, thử nghiệm ngưỡng cực trị trượt và đánh giá riêng trên các đợt cực trị. Thứ tư,
+mở rộng sang nhiều trạm hoặc nhiều lưu vực để kiểm tra khả năng tổng quát hóa.
+
+Với mô hình, có thể thử các biến thể như LightGBM với monotonic constraints, mô hình
+tuyến tính có lag, hoặc mô hình trạng thái (state-space). Tuy nhiên, mọi biến thể cần
+được so sánh với Naive trên cùng split và cùng horizon. Nếu không có cải thiện rõ
+ràng, giữ baseline đơn giản là lựa chọn hợp lý hơn về chi phí vận hành và khả năng
+giải thích.
+
+\subsection{Ý nghĩa thực hành}
+
+Trong bối cảnh ra quyết định, kết quả này nhắc rằng một mô hình phức tạp cần được
+chứng minh bằng thực nghiệm, không nên giả định trước. Với chuỗi lưu lượng có tính
+dai dẳng cao, dự báo ngắn hạn có thể dùng persistence làm mốc; mô hình học máy chỉ
+nên được thêm vào nếu có bằng chứng cải thiện ngoài mẫu. Đồng thời, cần theo dõi
+mức nền và các giai đoạn chuyển chế độ, vì đó là nơi các mô hình dựa trên mùa vụ dễ
+sai nhất.
+
+Cuối cùng, việc công bố mã nguồn, dữ liệu và website giúp người đọc kiểm tra lại
+các kết luận. Đây là một phần của chất lượng báo cáo: không chỉ trình bày kết quả
+mà còn cho thấy cách tạo ra kết quả đó.

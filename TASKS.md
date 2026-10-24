@@ -42,6 +42,11 @@ hoàn tất nếu chưa có tệp/kết quả kiểm chứng.
 | P13.1 | Sinh bảng/hình báo cáo đầy đủ | Hoàn tất | `latex_full/tables/` (14 bảng), `latex_full/figures/` (14 hình), `latex_full/generated/assets_manifest.json` |
 | P13.2 | Tích hợp export full vào pipeline | Hoàn tất | `export_latex_full.py`; `--stage export` sinh cả `latex/` và `latex_full/` |
 | P13.3 | Kiểm tra asset compile | Hoàn tất | Tectonic compile bộ asset 5 trang; 15 Python test pass; ảnh PNG đã kiểm tra |
+| P13.4 | Soạn báo cáo đầy đủ 40–45 trang | Hoàn tất | `latex_full/main.tex`, `latex_full/sections/`; `main.pdf` 41 trang |
+| P13.5 | Sửa lỗi export LaTeX | Hoàn tất | `AcfSeven/AcfThirty/AcfOneEightyTwo`; data quality dùng `--`; 15 bảng/14 hình |
+| P13.6 | QA bố cục và danh mục báo cáo đầy đủ | Hoàn tất | Đã rà 41 trang; sửa caption Hình 8, dịch Mục lục/Danh mục bảng/hình, khử trang trống |
+| P13.7 | Hướng dẫn Overleaf bản đầy đủ | Hoàn tất | `latex_full/README_OVERLEAF.md` |
+| P13.8 | Đóng gói bản dài vào deliverables/website | Chưa làm | Cần thay PDF, cập nhật DownloadsPage/AppShell và source ZIP |
 
 ## Ghi chú
 

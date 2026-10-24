@@ -1,0 +1,91 @@
+\section{Kiểm tra chất lượng dữ liệu và thiết kế đánh giá}
+\label{sec:audit}
+
+\subsection{Kiểm tra tính đầy đủ và tính hợp lệ}
+
+Bước audit kiểm tra ba khía cạnh: tính liên tục của lịch, tính duy nhất của ngày và
+miền giá trị của lưu lượng. Kết quả được tóm tắt trong
+Bảng~\ref{tab:data-quality}. Chuỗi có đúng \DatasetN{} ngày, không thiếu ngày nào
+trong khoảng \DateMin{}--\DateMax{}, không có ngày trùng và không có giá trị null.
+Các giá trị lưu lượng đều hữu hạn, dương và không có ngày nào bằng 0. Điều này cho
+thấy dữ liệu đã được làm sạch ở mức cơ bản và không cần nội suy hoặc loại bỏ quan
+trắc.
+
+\begin{table}[H]
+\centering
+\small
+\input{tables/data_quality}
+\caption{Kết quả kiểm tra chất lượng dữ liệu gốc.}
+\label{tab:data-quality}
+\end{table}
+
+Một điểm cần lưu ý là báo cáo chỉ kiểm tra chất lượng \emph{kỹ thuật} của tệp dữ liệu,
+không kiểm tra chất lượng \emph{đo đạc} tại trạm. Việc không có ngày thiếu không có
+nghĩa là số liệu đã được hiệu chỉnh theo cùng một quy trình trong suốt 14 năm. Vì
+vậy các kết luận về xu hướng được trình bày thận trọng, đặc biệt khi so sánh giữa
+các giai đoạn có mức nền rất khác nhau.
+
+Mã băm SHA256 rút gọn của dữ liệu gốc là \texttt{f83d984747fe}; mã đầy đủ được lưu
+trong \texttt{data\_quality.json} và được dùng để kiểm tra rằng
+các lần chạy pipeline sau đọc đúng cùng một tệp. Nếu dữ liệu bị thay đổi dù chỉ một
+ký tự, mã băm sẽ khác và báo cáo không còn tương ứng với kết quả cũ.
+
+\subsection{Thiết kế chia tập và chống rò rỉ dữ liệu}
+
+Bài toán được định nghĩa như sau: tại gốc thời gian $t$, mô hình nhận các quan sát
+đến hết ngày $t$ và phát hành đồng thời bảy dự báo cho $t+1,\ldots,t+7$. Mỗi cặp
+$(t,h)$ là một mẫu đánh giá. Cách định nghĩa này phản ánh đúng việc vận hành: tại
+thời điểm ra quyết định, ta không biết giá trị tương lai, nhưng có thể dùng toàn bộ
+lịch sử đã quan sát.
+
+Các tập được chia theo thời gian, không xáo trộn:
+
+\begin{table}[H]
+\centering
+\small
+\input{tables/split_summary}
+\caption{Các tập huấn luyện, validation, refit và test.}
+\label{tab:split}
+\end{table}
+
+Tập Train dùng để chọn tham số LightGBM. Tập Validation dùng để chọn cấu hình và
+đánh giá sơ bộ trong quá trình phát triển. Tập Test chỉ được dùng một lần sau khi
+cấu hình đã được khóa. Tập Refit gộp Train và Validation để huấn luyện mô hình cuối
+cùng trước khi dự báo Test. Vì Test nằm hoàn toàn sau Refit, không có quan sát nào
+của Test được dùng để tính lag, rolling window hoặc chọn tham số.
+
+Số gốc dự báo nhỏ hơn số ngày của mỗi giai đoạn vì hai ràng buộc: cần tối thiểu 30
+ngày lịch sử để tính đặc trưng, và cần đủ 7 ngày tương lai để tạo nhãn. Với Train,
+gốc đầu tiên là 31/01/2010 và gốc cuối là 24/12/2019; với Validation, gốc đầu tiên
+là 31/12/2019 và gốc cuối là 24/12/2021; với Test, gốc đầu tiên là 31/12/2021 và
+gốc cuối là 24/12/2023. Các gốc này tạo ra 3.615, 725 và 724 mẫu tương ứng. Tổng
+số cặp dự báo trên Test là $724 \times 7 = 5.068$ cho mỗi mô hình.
+
+\subsection{Các kiểm tra chống rò rỉ}
+
+Pipeline thực hiện bốn kiểm tra tự động:
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Không xáo trộn:} thứ tự thời gian được giữ nguyên; không có phép
+  \texttt{train\_test\_\allowbreak split} ngẫu nhiên.
+  \item \textbf{Biên tập:} ngày mục tiêu lớn nhất của Train không vượt quá
+  31/12/2019; mục tiêu của Validation và Test nằm trong đúng khoảng đã khai báo.
+  \item \textbf{Đặc trưng lịch:} các đặc trưng như tháng, ngày trong năm của
+  \emph{ngày mục tiêu} được phép dùng vì chúng biết trước; không dùng bất kỳ giá trị
+  lưu lượng nào của ngày mục tiêu.
+  \item \textbf{Khóa cấu hình:} sau khi chọn mô hình, cấu hình và split được ghi
+  vào manifest; các bước evaluate và export chỉ đọc lại cấu hình đã khóa.
+\end{itemize}
+
+Các kiểm tra này không bảo đảm mô hình tốt, nhưng bảo đảm kết quả Test là đánh giá
+ngoài mẫu đúng nghĩa. Đây là yêu cầu tối thiểu để một báo cáo dự báo chuỗi thời gian
+có thể được xem là nghiêm túc.
+
+\subsection{Điểm mạnh và giới hạn của thiết kế}
+
+Thiết kế theo thời gian có ưu điểm là mô phỏng đúng điều kiện triển khai, nhưng cũng
+có giới hạn. Thứ nhất, chỉ có hai năm Test nên các chỉ số có thể dao động mạnh nếu
+một năm có chế độ dòng chảy khác biệt. Thứ hai, vì dữ liệu chỉ có một chuỗi, không
+thể đánh giá khả năng tổng quát hóa sang trạm khác. Thứ ba, các đặc trưng chưa bao
+gồm biến khí tượng hoặc vận hành hồ chứa, nên mô hình chỉ học được cấu trúc nội tại
+của chuỗi. Những giới hạn này được quay lại trong phần thảo luận.

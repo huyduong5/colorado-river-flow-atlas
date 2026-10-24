@@ -1,0 +1,125 @@
+\clearpage
+\appendix
+
+\section{Toàn bộ các đợt vượt Q95}
+\label{app:events}
+
+Bảng~\ref{tab:all-events} liệt kê đầy đủ 15 đợt, bao gồm ngày bắt đầu, ngày kết
+thúc, số ngày, ngày đỉnh và lưu lượng đỉnh. Các đợt được sắp xếp theo thời gian.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\input{tables/extreme_events}
+\caption{Toàn bộ các đợt lưu lượng vượt Q95 trong giai đoạn 2010--2023.}
+\label{tab:all-events}
+\end{table}
+
+\section{Thống kê lưu lượng theo năm}
+\label{app:yearly}
+
+Bảng~\ref{tab:yearly-stats} bổ sung thống kê theo năm cho phân tích ở câu hỏi 1.
+Các giá trị được tính trên toàn bộ ngày trong năm, không phải trung bình của các
+tháng.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\input{tables/yearly_stats}
+\caption{Thống kê lưu lượng theo năm, 2010--2023.}
+\label{tab:yearly-stats}
+\end{table}
+
+\section{Manifest và kiểm tra tính nhất quán}
+\label{app:manifest}
+
+Bảng~\ref{tab:manifest} tóm tắt các thông tin nhận dạng của lần chạy. Các thông tin
+này được lưu trong \texttt{run\_manifest.json}, \texttt{data\_quality.json} và
+\texttt{model\_selection.json}. Nếu một trong các giá trị này thay đổi, kết quả
+trong báo cáo không còn tương ứng với lần chạy mới.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Trường} & \textbf{Giá trị} \\
+\midrule
+Run ID & \texttt{\RunId} \\
+Dataset hash & \texttt{f83d984747fe\ldots} (đầy đủ trong manifest) \\
+Config hash & \texttt{b45e27e26f42\ldots} (đầy đủ trong manifest) \\
+Seed & 42 \\
+Số ngày dữ liệu & \DatasetN \\
+Số gốc Test & 724 \\
+Số cặp Test mỗi mô hình & 5.068 \\
+Ngưỡng Q95 & \QHigh{} m\textsuperscript{3}/s \\
+Số đợt vượt Q95 & \NEvents \\
+Số bảng / hình full & 14 / 14 \\
+Python & 3.12.3 \\
+pandas & 3.1.0 \\
+NumPy & 2.5.4 \\
+statsmodels & 0.15.0 \\
+LightGBM & 4.7.0 \\
+Matplotlib & 3.11.2 \\
+\bottomrule
+\end{tabularx}
+\caption{Thông tin nhận dạng và phiên bản phần mềm của lần chạy.}
+\label{tab:manifest}
+\end{table}
+
+Các kiểm tra tự động đã chạy gồm: audit dữ liệu, kiểm tra split không xáo trộn,
+kiểm tra biên ngày mục tiêu, 15 bài test Python và build website. Kết quả test
+không thay thế kiểm tra khoa học, nhưng bảo đảm pipeline không bị lỗi cú pháp hoặc
+lỗi dữ liệu cơ bản.
+
+\section{Hướng dẫn tái lập}
+\label{app:reproduce}
+
+Các lệnh dưới đây chạy từ thư mục gốc của dự án. Môi trường được tạo bằng
+\texttt{uv}; có thể dùng \texttt{pip} nếu đã có Python 3.12.
+
+\begin{verbatim}
+cd code
+uv venv --system-site-packages .venv
+uv pip install --python .venv/bin/python -e .
+.venv/bin/python -m colorado_flow.pipeline --stage all
+\end{verbatim}
+
+Lệnh trên chạy lần lượt audit, EDA, features, train, freeze, evaluate và export.
+Kết quả nằm trong \texttt{code/results}; bảng và hình cho báo cáo nằm trong
+\texttt{latex/} và \texttt{latex\_full/}.
+
+Để build website:
+
+\begin{verbatim}
+cd code/web
+npm ci
+npm run build
+\end{verbatim}
+
+Để build báo cáo đầy đủ bằng Tectonic:
+
+\begin{verbatim}
+cd latex_full
+tectonic -X compile main.tex
+\end{verbatim}
+
+Nếu dùng Overleaf, upload thư mục \texttt{latex\_full} và đặt \texttt{main.tex}
+làm tệp chính. Các tệp bảng, hình và số liệu đã được sinh sẵn; không cần chạy lại
+Python trên Overleaf.
+
+\section{Ghi chú về hai phiên bản báo cáo}
+\label{app:versions}
+
+Báo cáo này là bản đầy đủ, được mở rộng từ bản nộp 5 trang theo yêu cầu của người
+học. Bản 5 trang được giữ trong \texttt{latex/} và
+\texttt{deliverables/} (tệp PDF cùng mã sinh viên); bản đầy đủ được build
+từ \texttt{latex\_full/main.tex}. Hai phiên bản dùng chung dữ liệu, cùng run ID và
+cùng bộ kết quả, nên không có mâu thuẫn số liệu giữa bản ngắn và bản dài.
+
+Việc giữ cả hai phiên bản giúp người đọc chọn mức độ chi tiết phù hợp: bản ngắn để
+nộp đúng giới hạn trang, bản dài để trình bày đầy đủ phương pháp, chẩn đoán và
+thảo luận. Khi có thay đổi dữ liệu hoặc mô hình, cả hai cần được build lại từ cùng
+một lần chạy pipeline.

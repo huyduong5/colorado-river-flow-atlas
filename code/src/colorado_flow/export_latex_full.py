@@ -242,7 +242,7 @@ def _table_data_quality(quality: pd.DataFrame, path: Path) -> None:
         if label == "SHA256":
             value = _tex(value[:16]) + r"\ldots{}"
         else:
-            value = _tex(value)
+            value = _tex(value).replace("→", "--")
         rows.append(f"{_tex(label)} & {value} \\\\")
     _write_tabular(path, "@{}ll@{}", "Hạng mục & Giá trị", rows)
 
@@ -481,9 +481,9 @@ def export_latex_full(cfg: dict[str, Any], manifest: dict[str, Any]) -> Path:
     values = {
         "MonthlyAmplitude": vnum(q1["monthly_amplitude_mean"]),
         "YearlyAmplitude": vnum(q1["yearly_amplitude_mean"]),
-        "Acf7": vnum(season["acf_lag_7"], 3),
-        "Acf30": vnum(season["acf_lag_30"], 3),
-        "Acf182": vnum(season["acf_lag_182"], 3),
+        "AcfSeven": vnum(season["acf_lag_7"], 3),
+        "AcfThirty": vnum(season["acf_lag_30"], 3),
+        "AcfOneEightyTwo": vnum(season["acf_lag_182"], 3),
         "TrendStart": vnum(season["trend_start"]),
         "TrendEnd": vnum(season["trend_end"]),
         "TrendMin": vnum(season["trend_min"]),

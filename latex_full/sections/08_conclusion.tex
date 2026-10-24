@@ -1,0 +1,37 @@
+\section{Kết luận}
+\label{sec:conclusion}
+
+Báo cáo đã phân tích chuỗi lưu lượng dòng chảy sông Colorado giai đoạn 2010--2023
+và trả lời ba nhóm câu hỏi đặt ra. Về cấu trúc chuỗi, dữ liệu có \DatasetN{} ngày,
+không thiếu, không trùng và không có giá trị bất thường về miền xác định. Chuỗi có
+tính dai dẳng ngắn hạn rất mạnh, mùa vụ theo tháng yếu và mức nền thay đổi theo
+từng giai đoạn. Xu hướng STL không tuyến tính: mức nền tăng từ đầu giai đoạn, đạt
+đỉnh ở giữa và giảm trong những năm gần đây. Đây là đặc điểm quan trọng nhất cần
+được tính đến khi chọn mô hình.
+
+Về cực trị, ngưỡng Q95 là \QHigh{} m\textsuperscript{3}/s, tương ứng z tĩnh
+\ZThreshold{}. Có \NDaysHigh{} ngày vượt ngưỡng, chiếm \ShareHigh{}\%, và
+\NEvents{} đợt. Các đợt tập trung vào 2017--2018 và 2020; đợt dài nhất kéo dài
+\LongestEvent{} ngày. Phân bố theo tháng không tạo thành một mùa vụ cố định, và
+ngưỡng toàn mẫu chỉ phù hợp cho mục tiêu mô tả, không phù hợp cho vận hành.
+
+Về dự báo, LightGBM direct 7 đạt mean RMSE \LgbmMeanRmse{} và NSE \LgbmMeanNse{}
+trên Test, gần tương đương Naive (\NaiveMeanRmse{} và \NaiveMeanNse{}) và tốt hơn
+nhiều so với Seasonal Naive 365 (\SeasonalMeanRmse{}). Khoảng cách giữa LightGBM và
+Naive chỉ khoảng 0,3\%, không đủ để khẳng định mô hình học máy vượt trội. Sai số
+tăng theo horizon; D+1 có RMSE khoảng 2,79 và NSE 0,970, trong khi D+7 có RMSE
+khoảng 7,10 và NSE 0,802. Test không có ngày vượt Q95, nên báo cáo không thể kết
+luận về khả năng dự báo cực trị.
+
+Ba bài học chính rút ra là: (i) baseline đơn giản phải được đánh giá nghiêm túc
+trước khi thêm mô hình phức tạp; (ii) mùa vụ yếu và mức nền thay đổi có thể khiến
+các mô hình dựa trên “cùng ngày năm trước” thất bại; (iii) chất lượng dữ liệu và
+khả năng tái lập quan trọng không kém độ phức tạp của mô hình. Website kết quả,
+mã nguồn và manifest được công bố để người đọc có thể kiểm tra lại từng con số.
+
+Hướng phát triển tiếp theo là bổ sung biến ngoại sinh, đánh giá xác suất, dùng
+ngưỡng cực trị trượt và mở rộng sang nhiều trạm. Trước khi làm những việc đó, cần
+giữ nguyên nguyên tắc: mọi cải thiện phải được chứng minh trên dữ liệu ngoài mẫu,
+với cùng split và cùng baseline. Trong phạm vi dữ liệu hiện có, kết luận trung thực
+nhất là LightGBM chưa vượt được Naive, và báo cáo trình bày kết quả đó thay vì che
+giấu bằng một phép so sánh có lợi.

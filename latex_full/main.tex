@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Noto Serif}
+  {\setmainfont{Noto Serif}}
+  {\IfFontExistsTF{DejaVu Serif}{\setmainfont{DejaVu Serif}}{\setmainfont{Latin Modern Roman}}}
+\IfFontExistsTF{Noto Sans}
+  {\setsansfont{Noto Sans}}
+  {\IfFontExistsTF{DejaVu Sans}{\setsansfont{DejaVu Sans}}{\setsansfont{Latin Modern Sans}}}
+\IfFontExistsTF{Noto Sans Mono}
+  {\setmonofont{Noto Sans Mono}}
+  {\IfFontExistsTF{DejaVu Sans Mono}{\setmonofont{DejaVu Sans Mono}}{\setmonofont{Latin Modern Mono}}}
+
+\usepackage[top=2.2cm,bottom=2.2cm,left=2.5cm,right=2.2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.12}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\renewcommand{\figurename}{Hình}
+\renewcommand{\tablename}{Bảng}
+\renewcommand{\refname}{Tài liệu tham khảo}
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\listtablename}{Danh mục bảng}
+\renewcommand{\listfigurename}{Danh mục hình}
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\sffamily}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+\titleformat{\subsection}{\large\bfseries\sffamily}{\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{6pt}{2pt}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.3em}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,citecolor=blue!45!black}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\sffamily Phân tích chuỗi thời gian -- Colorado}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{microtype}
+\usepackage{seqsplit}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.2em}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\emergencystretch}{1.2em}
+\graphicspath{{figures/}{assets/}}
+
+\input{metadata}
+\input{generated/numbers}
+
+\begin{document}
+
+\input{sections/00_title}
+\pagenumbering{roman}
+\input{sections/00_front}
+
+\clearpage
+\pagenumbering{arabic}
+
+\input{sections/01_data}
+\input{sections/02_audit}
+\input{sections/03_q1}
+\input{sections/04_q2}
+\input{sections/05_q3}
+\input{sections/06_website}
+\input{sections/07_discussion}
+\input{sections/08_conclusion}
+\input{sections/references}
+\input{sections/appendix}
+
+\end{document}

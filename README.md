@@ -37,7 +37,7 @@ ungdungtuan2/
   TASKS.md                 # trạng thái công việc
   code/                    # pipeline Python, config, tests, website
   latex/                   # source báo cáo ngắn, hình, bảng
-  latex_full/              # bảng, hình và số liệu cho báo cáo đầy đủ
+  latex_full/              # source, bảng, hình và số liệu báo cáo đầy đủ
   deliverables/            # PDF, ZIP, checksum
 ```
 
@@ -88,10 +88,16 @@ Mã nguồn công khai: https://github.com/huyduong5/colorado-river-flow-atlas
 
 ## Báo cáo PDF
 
-Bản nộp hiện tại dài đúng 5 trang, được biên dịch bằng XeLaTeX (Tectonic local).
-Source trong `latex/` có thể upload Overleaf; xem `latex/README_OVERLEAF.md`.
+Bản nộp hiện tại trong `deliverables/` dài đúng 5 trang, được biên dịch bằng XeLaTeX
+(Tectonic local). Source trong `latex/` có thể upload Overleaf; xem
+`latex/README_OVERLEAF.md`.
 
-Bộ asset cho báo cáo đầy đủ 40–45 trang nằm trong `latex_full/`:
+Báo cáo đầy đủ 41 trang đã compile tại `latex_full/main.pdf`; source nằm trong
+`latex_full/main.tex` và `latex_full/sections/`. Hướng dẫn Overleaf:
+`latex_full/README_OVERLEAF.md`. Bản đầy đủ đang được đóng gói thay cho bản 5 trang
+trong `deliverables/` và website.
+
+Bộ asset cho báo cáo đầy đủ nằm trong `latex_full/`:
 
 - `tables/`: 14 bảng sinh tự động.
 - `figures/`: 14 hình PDF.

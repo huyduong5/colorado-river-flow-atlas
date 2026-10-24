@@ -1,0 +1,124 @@
+\section{Dữ liệu, công cụ và quy trình}
+\label{sec:data}
+
+\subsection{Bối cảnh và phạm vi dữ liệu}
+
+Sông Colorado là một trong những hệ thống sông quan trọng nhất của miền Tây Hoa Kỳ.
+Lưu lượng dòng chảy tại một trạm quan trắc phản ánh tổng hợp nhiều quá trình: lượng
+mưa và tuyết rơi trên lưu vực, tốc độ tan tuyết theo mùa, đặc điểm địa hình, lớp phủ
+thực vật và cả hoạt động điều tiết của hồ chứa. Chuỗi lưu lượng ngày vì vậy thường
+có tính dai dẳng cao: giá trị hôm nay và những ngày gần nhất có tương quan mạnh với
+giá trị ngày mai. Tuy nhiên, chuỗi cũng có thể thay đổi mức nền theo năm do điều kiện
+khí hậu và vận hành hệ thống, tạo ra xu hướng dài hạn và các giai đoạn lưu lượng cao
+bất thường.
+
+Báo cáo sử dụng tệp \texttt{colorado\_river\_flow.csv} đi kèm bài tập. Tệp có hai cột:
+\texttt{date} (ngày quan trắc) và \texttt{discharge\_m3s} (lưu lượng, đơn vị
+m\textsuperscript{3}/s). Khoảng thời gian từ \DateMin{} đến \DateMax{}, gồm
+\DatasetN{} ngày. Bộ dữ liệu không kèm mô tả chi tiết về trạm đo, đơn vị vận hành
+hay quy trình hiệu chỉnh số liệu; vì vậy báo cáo chỉ phân tích cột lưu lượng được
+cung cấp và không suy diễn thêm về nguồn gốc hoặc chất lượng đo.
+
+Mục tiêu của phần dữ liệu là trả lời ba câu hỏi kỹ thuật trước khi mô hình hóa:
+(1) chuỗi có đủ dài và đủ liên tục để phân tích mùa vụ và dự báo hay không;
+(2) có ngày thiếu, ngày trùng, giá trị null hoặc giá trị bất thường về miền xác định
+hay không; (3) cách chia Train--Validation--Test có bảo toàn thứ tự thời gian và
+tránh rò rỉ thông tin hay không. Các câu hỏi này được kiểm tra tự động trong pipeline
+và kết quả được lưu thành tệp JSON để báo cáo có thể tái lập.
+
+\subsection{Cấu trúc và cách đọc dữ liệu}
+
+Bảng~\ref{tab:schema} mô tả hai cột của dữ liệu gốc. Cột ngày được chuyển sang kiểu
+\texttt{datetime} và sắp xếp tăng dần; cột lưu lượng được giữ ở kiểu số thực. Sau khi
+kiểm tra, dữ liệu được ghi lại thành tệp đã xử lý để các bước sau không phải đọc lại
+và diễn giải lại dữ liệu thô.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+\textbf{Cột} & \textbf{Kiểu} & \textbf{Ý nghĩa và cách xử lý} \\
+\midrule
+\texttt{date} & ngày & Ngày quan trắc, định dạng ISO \texttt{YYYY-MM-DD}; dùng làm trục thời gian và khóa duy nhất. \\
+\texttt{discharge\_m3s} & số thực & Lưu lượng dòng chảy, đơn vị m\textsuperscript{3}/s; giữ nguyên giá trị gốc, không làm tròn khi tính toán. \\
+\bottomrule
+\end{tabularx}
+\caption{Mô tả các cột dữ liệu gốc và cách xử lý.}
+\label{tab:schema}
+\end{table}
+
+Vì dữ liệu chỉ có một chuỗi lưu lượng, các phân tích mô tả được thực hiện trên toàn
+bộ 14 năm. Bài toán dự báo sử dụng cùng chuỗi nhưng chia theo thời gian: Train
+2010--2019, Validation 2020--2021 và Test 2022--2023. Cách chia này mô phỏng tình
+huống thực tế: khi dự báo một ngày trong tương lai, mô hình chỉ được phép dùng thông
+tin có trước thời điểm đó. Không có phép trộn ngẫu nhiên giữa các năm, vì trộn ngẫu
+nhiên sẽ đưa thông tin tương lai vào tập huấn luyện và làm sai lệch đánh giá.
+
+\subsection{Công cụ và môi trường}
+
+Pipeline được viết bằng Python 3.12, sử dụng \texttt{pandas} \cite{mckinney2010} và
+\texttt{numpy} \cite{harris2020} cho xử lý dữ liệu, \texttt{statsmodels}
+\cite{seabold2010} cho phân rã STL và tự tương quan, \texttt{lightgbm}
+\cite{ke2017} cho mô hình cây tăng cường gradient, \texttt{matplotlib}
+\cite{hunter2007} cho hình tĩnh và \texttt{pytest} cho kiểm thử. Các tham số chính được đặt trong
+\texttt{code/configs/default.yaml}; phiên bản thư viện được ghi trong
+\texttt{code/requirements.lock.txt}. Website kết quả dùng React, TypeScript, Vite và
+ECharts, được xây dựng thành các tệp tĩnh và triển khai bằng GitHub Pages.
+
+Báo cáo được biên dịch bằng XeLaTeX thông qua Tectonic. Bảng và hình trong báo cáo
+không được chép tay từ màn hình: chúng được sinh từ kết quả pipeline, sau đó LaTeX
+chỉ việc chèn nội dung đã sinh. Cách làm này giúp giảm sai lệch giữa số liệu trong
+báo cáo, số liệu trên website và số liệu trong mã nguồn. Mọi lần chạy lại pipeline
+đều tạo một \texttt{run\_id}; báo cáo dùng run \RunId{} để đối chiếu.
+
+\subsection{Quy trình tái lập}
+
+Pipeline gồm bảy bước có thứ tự:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Audit:} đọc dữ liệu thô, kiểm tra ngày thiếu/trùng, null, giá trị
+  âm, giá trị bằng 0 và tính liên tục của lịch.
+  \item \textbf{EDA:} tính thống kê mô tả, thống kê theo tháng/năm, phân rã STL và
+  tự tương quan.
+  \item \textbf{Features:} tạo lag, rolling window, đặc trưng lịch và biến mục tiêu
+  cho từng horizon.
+  \item \textbf{Train:} huấn luyện LightGBM trên Train, chọn tham số bằng Validation.
+  \item \textbf{Freeze:} khóa cấu hình, tham số và split để tránh thay đổi sau khi
+  đã xem Test.
+  \item \textbf{Evaluate:} dự báo trên Test, tính RMSE, MAE, NSE theo từng horizon,
+  theo năm và theo mức lưu lượng.
+  \item \textbf{Export:} sinh bảng, hình, số liệu LaTeX, manifest và dữ liệu cho
+  website.
+\end{enumerate}
+
+Mỗi bước ghi kết quả trung gian vào \texttt{code/results}. Nếu một bước bị lỗi, các
+bước sau không được chạy tiếp. Cách tổ chức này quan trọng với báo cáo vì nó buộc
+mọi con số phải có nguồn gốc rõ ràng: từ dữ liệu thô, qua cấu hình, đến tệp kết quả
+và cuối cùng là bảng/hình trong LaTeX.
+
+\subsection{Tiêu chí đánh giá dự báo}
+
+Ba thước đo được dùng là RMSE, MAE và NSE; NSE được đề xuất trong
+\cite{nash1970}. Với $n$ cặp giá trị thực $y_i$ và dự báo $\hat{y}_i$:
+
+\begin{equation}
+\mathrm{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2},
+\qquad
+\mathrm{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|.
+\label{eq:rmse-mae}
+\end{equation}
+
+\begin{equation}
+\mathrm{NSE} = 1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+{\sum_{i=1}^{n}(y_i-\bar{y})^2}.
+\label{eq:nse}
+\end{equation}
+
+RMSE phạt mạnh các sai số lớn và có cùng đơn vị với lưu lượng; MAE dễ diễn giải hơn
+vì là sai số tuyệt đối trung bình; NSE so sánh mô hình với một dự báo “trung bình”
+của chính tập đánh giá. NSE bằng 1 là hoàn hảo, bằng 0 là không tốt hơn trung bình,
+âm là kém hơn trung bình. Vì các horizon có độ khó khác nhau, báo cáo trình bày cả
+trung bình theo horizon (mean) và giá trị gộp trên toàn bộ cặp dự báo (pooled). Hai
+cách tính này không thay thế nhau: mean cho biết mô hình tốt đến đâu ở từng horizon,
+pooled cho biết sai số tổng hợp trên toàn bộ tập Test.

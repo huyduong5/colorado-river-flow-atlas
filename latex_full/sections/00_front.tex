@@ -1,0 +1,98 @@
+\section*{Tóm tắt}
+\addcontentsline{toc}{section}{Tóm tắt}
+
+Báo cáo phân tích chuỗi thời gian lưu lượng dòng chảy sông Colorado trong giai đoạn
+2010--2023, sử dụng \DatasetN{} ngày quan sát từ \DateMin{} đến \DateMax{}.
+Dữ liệu được kiểm tra tính đầy đủ, tính duy nhất và tính liên tục trước khi sử dụng.
+Báo cáo trả lời ba nhóm câu hỏi: (i) mô tả xu hướng, mùa vụ và cấu trúc tự tương quan
+của chuỗi; (ii) xác định các ngày và các đợt lưu lượng vượt ngưỡng cực trị Q95;
+(iii) xây dựng và đánh giá mô hình dự báo trực tiếp 7 ngày, so sánh với các mô hình
+đơn giản, đồng thời công bố kết quả trên một website tĩnh.
+
+Kết quả chính cho thấy chuỗi có tính dai dẳng rất mạnh: hệ số tự tương quan bậc 7
+là \AcfSeven, bậc 30 là \AcfThirty, trong khi tương quan với độ trễ một năm gần như
+bằng không (\AcfYear). Phân rã STL cho thấy thành phần xu hướng chiếm ưu
+thế so với thành phần mùa vụ; biên độ trung bình theo tháng chỉ khoảng
+\MonthlyAmplitude{} m\textsuperscript{3}/s, trong khi biên độ theo năm lên tới
+\YearlyAmplitude{} m\textsuperscript{3}/s. Ngưỡng Q95 của toàn bộ chuỗi là
+\QHigh{} m\textsuperscript{3}/s, tương ứng \NDaysHigh{} ngày vượt ngưỡng
+(\ShareHigh{}\%) và \NEvents{} đợt liên tiếp. Đợt dài nhất kéo dài
+\LongestEvent{} ngày; lưu lượng lớn nhất quan sát được là \QMax{}
+m\textsuperscript{3}/s.
+
+Với bài toán dự báo 7 ngày, mô hình LightGBM trực tiếp đạt RMSE \LgbmMeanRmse{}
+và NSE \LgbmMeanNse{} trên tập Test, gần tương đương mô hình Naive
+(RMSE \NaiveMeanRmse{}, NSE \NaiveMeanNse{}) và tốt hơn rất nhiều so với Seasonal
+Naive 365 (RMSE \SeasonalMeanRmse{}). Khoảng cách nhỏ giữa LightGBM và Naive cho
+thấy trong chuỗi này, giá trị gần nhất đã chứa phần lớn thông tin dự báo ngắn hạn;
+mô hình học máy không tạo ra cải thiện vượt trội. Báo cáo phân tích rõ nguyên nhân,
+các yếu tố ảnh hưởng theo từng horizon, mức độ quan trọng của đặc trưng và những
+giới hạn của kết quả.
+
+Toàn bộ mã nguồn, dữ liệu đã xử lý, bảng, hình và báo cáo được công bố tại
+\url{https://github.com/huyduong5/colorado-river-flow-atlas}. Website kết quả có
+địa chỉ \url{https://huyduong5.github.io/colorado-river-flow-atlas/}. Báo cáo không
+sử dụng GRU/LSTM do môi trường không cài PyTorch; mọi số liệu trong báo cáo đều
+được sinh lại từ pipeline, không có kết quả mô phỏng hoặc số liệu tự điền.
+
+\vspace{0.5em}
+\noindent\textbf{Từ khóa:} chuỗi thời gian, lưu lượng dòng chảy, Q95, STL,
+LightGBM, dự báo trực tiếp, RMSE, NSE, tái lập.
+
+\newpage
+\section*{Nội dung bài tập và phạm vi thực hiện}
+\addcontentsline{toc}{section}{Nội dung bài tập và phạm vi thực hiện}
+
+Bài tập yêu cầu phân tích một chuỗi thời gian thực tế và trình bày kết quả trong
+một báo cáo có thể tái lập. Ba nhóm câu hỏi được triển khai như sau:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Phân tích chuỗi:} mô tả phân bố, xu hướng dài hạn, tính mùa vụ và
+  cấu trúc tự tương quan của lưu lượng dòng chảy; kiểm tra các giả định về tính
+  dừng và độ dài mùa.
+  \item \textbf{Phát hiện cực trị:} xác định ngưỡng Q95, đếm số ngày vượt ngưỡng,
+  nhận diện các đợt liên tiếp, mô tả phân bố theo năm và theo tháng; kiểm tra độ
+  nhạy của kết quả khi dùng ngưỡng Z-score tĩnh.
+  \item \textbf{Dự báo 7 ngày:} xây dựng mô hình dự báo trực tiếp cho từng horizon,
+  so sánh Naive, Seasonal Naive 365 và LightGBM; đánh giá bằng RMSE, MAE và NSE
+  trên tập Test; phân tích lỗi theo horizon, theo năm và theo mức lưu lượng; công
+  bố bảng, hình và website tương tác.
+\end{enumerate}
+
+Phạm vi dữ liệu là 14 năm, từ \DateMin{} đến \DateMax{}. Tập Test gồm hai
+năm cuối (2022--2023) và được giữ kín trong toàn bộ quá trình chọn mô hình. Đây là
+đánh giá backtest trên dữ liệu lịch sử, không phải hệ thống cảnh báo lũ vận hành.
+Báo cáo không đưa thêm biến ngoại sinh như mưa, nhiệt độ, tuyết tan hoặc vận hành
+hồ chứa vì bộ dữ liệu đi kèm không có các cột này.
+
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+\newpage
+\section*{Danh mục từ viết tắt}
+\addcontentsline{toc}{section}{Danh mục từ viết tắt}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Từ viết tắt} & \textbf{Diễn giải} \\
+\midrule
+ACF & Hàm tự tương quan (Autocorrelation Function) \\
+MAE & Sai số tuyệt đối trung bình (Mean Absolute Error) \\
+NSE & Hệ số hiệu quả Nash--Sutcliffe (Nash--Sutcliffe Efficiency) \\
+Q95 & Phân vị 95\% của lưu lượng trên toàn bộ chuỗi \\
+RMSE & Căn bậc hai sai số bình phương trung bình (Root Mean Squared Error) \\
+STL & Phân rã xu hướng -- mùa vụ bằng LOESS (Seasonal-Trend decomposition using LOESS) \\
+LightGBM & Mô hình cây tăng cường gradient của Microsoft \\
+CI/CD & Tích hợp liên tục và triển khai liên tục \\
+SSG & Trang tĩnh được tạo trước (Static Site Generation) \\
+\bottomrule
+\end{tabularx}
+\caption{Danh mục từ viết tắt dùng trong báo cáo.}
+\end{table}
