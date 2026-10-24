@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "stl_period_days": 365,
+    "stl_robust": true,
+    "seasonal_strength": 0.10354343311375158,
+    "trend_strength": 0.9662229806151763,
+    "acf_lag_365": -0.14781152228131217,
+    "acf_lag_182": -0.018143828560761813,
+    "acf_lag_30": 0.6935281210950031,
+    "acf_lag_7": 0.9257000436016327,
+    "trend_start": 110.90008574140755,
+    "trend_end": 204.23902538973275,
+    "trend_min": 110.90008574140755,
+    "trend_max": 406.20097948132553
+  },
+  "q1": {
+    "monthly_mean_min": {
+      "month": 9,
+      "value": 292.31995614266435
+    },
+    "monthly_mean_max": {
+      "month": 11,
+      "value": 300.1558362455704
+    },
+    "yearly_mean_min": {
+      "year": 2010,
+      "value": 129.00830032809853
+    },
+    "yearly_mean_max": {
+      "year": 2017,
+      "value": 411.5745315933549
+    },
+    "monthly_amplitude_mean": 7.83588010290606,
+    "yearly_amplitude_mean": 282.56623126525636
+  }
+}

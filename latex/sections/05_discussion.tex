@@ -1,0 +1,20 @@
+\section{Thảo luận và giới hạn}
+
+Kết quả Q1--Q3 nhất quán với nhau: chuỗi có xu hướng dài hạn mạnh, mùa vụ yếu và các
+đợt cực trị tập trung ở một số năm. Chính vì mùa vụ yếu, Seasonal Naive 365 thất bại
+nặng; và vì chuỗi gần random-walk ở tần suất ngày, Naive persistence là baseline mạnh.
+
+Các giới hạn chính:
+\begin{itemize}
+  \item Chỉ có 14 năm dữ liệu ngày; Test chỉ 2 năm, chưa đủ cho kết luận dài hạn.
+  \item Chưa dùng biến ngoại sinh như mưa, nhiệt độ, tuyết tan hay vận hành hồ chứa.
+  \item GRU chưa chạy trong môi trường hiện tại; báo cáo không có kết quả GRU.
+  \item LightGBM dùng mục tiêu delta; đây là lựa chọn kỹ thuật đã ghi rõ, không phải
+        kết quả được chọn theo Test.
+  \item Đây là backtest, không phải dự báo vận hành hoặc cảnh báo lũ.
+\end{itemize}
+
+Về mặt phương pháp, việc giữ Test tách biệt và không tinh chỉnh trên Test là điều kiện
+cần để kết quả có ý nghĩa. Việc Naive thắng LightGBM một chút là kết quả trung thực,
+không phải lỗi cần che giấu. Nếu tiếp tục phát triển, nên thử mô hình có biến ngoại
+sinh, kiểm định rolling-origin dài hơn và phân tích sai số theo mùa.

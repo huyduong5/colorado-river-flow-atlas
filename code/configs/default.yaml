@@ -1,0 +1,70 @@
+project:
+  name: "Colorado River Flow Atlas"
+  title: "Phân tích và dự báo chuỗi thời gian lưu lượng dòng chảy sông Colorado"
+  seed: 42
+
+paths:
+  raw_csv: "data/raw/colorado_river_flow.csv"
+  processed_csv: "data/processed/colorado_river_flow_processed.csv"
+  features_csv: "data/processed/forecast_features.csv"
+  results_dir: "results"
+  figures_dir: "results/figures"
+  tables_dir: "results/tables"
+  checkpoints_dir: "results/checkpoints"
+  logs_dir: "results/logs"
+  docs_dir: "docs"
+  web_data_dir: "web/public/data"
+  latex_dir: "../latex"
+
+split:
+  train_start: "2010-01-01"
+  train_end: "2019-12-31"
+  validation_start: "2020-01-01"
+  validation_end: "2021-12-31"
+  test_start: "2022-01-01"
+  test_end: "2023-12-31"
+  refit_end: "2021-12-31"
+  horizon: 7
+  min_history: 30
+
+features:
+  lags: [1, 2, 3, 7, 14, 21, 28, 30]
+  rolling_windows: [7, 14, 30]
+  target_calendar: true
+
+lightgbm:
+  target_mode: "delta"  # delta = q_(t+h) - q_t; giữ vai trò persistence trong mô hình
+  num_boost_round: 1000
+  early_stopping_rounds: 50
+  n_jobs: 4
+  trials: 8
+  base_params:
+    objective: "regression"
+    metric: "rmse"
+    learning_rate: 0.03
+    num_leaves: 15
+    max_depth: 5
+    min_child_samples: 30
+    reg_lambda: 1.0
+    verbosity: -1
+    seed: 42
+    deterministic: true
+    force_col_wise: true
+  search_space:
+    learning_rate: [0.03, 0.05]
+    num_leaves: [7, 15, 31]
+    max_depth: [3, 5, -1]
+    min_child_samples: [20, 40, 80]
+    reg_lambda: [0.0, 1.0, 5.0]
+
+models:
+  naive: "naive"
+  seasonal_naive: "seasonal_naive_365"
+  lightgbm: "lightgbm_direct"
+
+threshold:
+  quantile: 0.95
+  scope: "2010-01-01..2023-12-31"
+
+web:
+  base: "/"

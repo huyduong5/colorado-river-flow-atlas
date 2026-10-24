@@ -1,0 +1,93 @@
+{
+  "base_columns": [
+    "q",
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_7",
+    "lag_14",
+    "lag_21",
+    "lag_28",
+    "lag_30",
+    "roll_mean_7",
+    "roll_std_7",
+    "roll_min_7",
+    "roll_max_7",
+    "roll_mean_14",
+    "roll_std_14",
+    "roll_min_14",
+    "roll_max_14",
+    "roll_mean_30",
+    "roll_std_30",
+    "roll_min_30",
+    "roll_max_30",
+    "diff_1",
+    "diff_7",
+    "origin_doy",
+    "origin_doy_sin",
+    "origin_doy_cos",
+    "origin_month",
+    "origin_month_sin",
+    "origin_month_cos"
+  ],
+  "target_calendar_by_horizon": {
+    "1": [
+      "target_doy_h1",
+      "target_doy_sin_h1",
+      "target_doy_cos_h1",
+      "target_month_h1",
+      "target_month_sin_h1",
+      "target_month_cos_h1"
+    ],
+    "2": [
+      "target_doy_h2",
+      "target_doy_sin_h2",
+      "target_doy_cos_h2",
+      "target_month_h2",
+      "target_month_sin_h2",
+      "target_month_cos_h2"
+    ],
+    "3": [
+      "target_doy_h3",
+      "target_doy_sin_h3",
+      "target_doy_cos_h3",
+      "target_month_h3",
+      "target_month_sin_h3",
+      "target_month_cos_h3"
+    ],
+    "4": [
+      "target_doy_h4",
+      "target_doy_sin_h4",
+      "target_doy_cos_h4",
+      "target_month_h4",
+      "target_month_sin_h4",
+      "target_month_cos_h4"
+    ],
+    "5": [
+      "target_doy_h5",
+      "target_doy_sin_h5",
+      "target_doy_cos_h5",
+      "target_month_h5",
+      "target_month_sin_h5",
+      "target_month_cos_h5"
+    ],
+    "6": [
+      "target_doy_h6",
+      "target_doy_sin_h6",
+      "target_doy_cos_h6",
+      "target_month_h6",
+      "target_month_sin_h6",
+      "target_month_cos_h6"
+    ],
+    "7": [
+      "target_doy_h7",
+      "target_doy_sin_h7",
+      "target_doy_cos_h7",
+      "target_month_h7",
+      "target_month_sin_h7",
+      "target_month_cos_h7"
+    ]
+  },
+  "n_rows": 5113,
+  "first_complete_row": "2010-01-31"
+}

@@ -1,0 +1,8 @@
+model,origin_date,target_date,horizon,y_true,y_pred
+lightgbm_direct,2023-12-31,2024-01-01,1,,236.724986
+lightgbm_direct,2023-12-31,2024-01-02,2,,236.716382
+lightgbm_direct,2023-12-31,2024-01-03,3,,236.788556
+lightgbm_direct,2023-12-31,2024-01-04,4,,236.913805
+lightgbm_direct,2023-12-31,2024-01-05,5,,237.105538
+lightgbm_direct,2023-12-31,2024-01-06,6,,237.095071
+lightgbm_direct,2023-12-31,2024-01-07,7,,237.369399

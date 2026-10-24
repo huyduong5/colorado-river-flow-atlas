@@ -1,0 +1,20 @@
+{
+  "monthly_mean_min": {
+    "month": 9,
+    "value": 292.31995614266435
+  },
+  "monthly_mean_max": {
+    "month": 11,
+    "value": 300.1558362455704
+  },
+  "yearly_mean_min": {
+    "year": 2010,
+    "value": 129.00830032809853
+  },
+  "yearly_mean_max": {
+    "year": 2017,
+    "value": 411.5745315933549
+  },
+  "monthly_amplitude_mean": 7.83588010290606,
+  "yearly_amplitude_mean": 282.56623126525636
+}

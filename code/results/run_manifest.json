@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-20261024T160504+0000",
+  "created_at_utc": "2026-10-24T16:05:04+00:00",
+  "project_version": "0.1.0",
+  "dataset_hash": "f83d984747fe12e5e31aa71e794e71d40f30c6dc6711544cb54ec5e7a9f83660",
+  "config_path": "/home/yue/Downloads/ungdungtuan2/code/configs/default.yaml",
+  "config_hash": "b45e27e26f423a4e608337bc7cc09377e5b953aee0a5e56a26632bbdebcecba0",
+  "seed": 42,
+  "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "lightgbm": "4.7.0",
+    "matplotlib": "3.11.2"
+  },
+  "split": {
+    "train_start": "2010-01-01",
+    "train_end": "2019-12-31",
+    "validation_start": "2020-01-01",
+    "validation_end": "2021-12-31",
+    "test_start": "2022-01-01",
+    "test_end": "2023-12-31",
+    "refit_end": "2021-12-31",
+    "horizon": 7,
+    "min_history": 30
+  },
+  "threshold": {
+    "quantile": 0.95,
+    "scope": "2010-01-01..2023-12-31"
+  }
+}

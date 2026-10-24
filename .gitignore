@@ -1,0 +1,35 @@
+# Python
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.ruff_cache/
+**/*.egg-info/
+
+# Node
+**/node_modules/
+**/dist/
+
+# LaTeX
+**/*.aux
+**/*.log
+**/*.out
+**/*.synctex.gz
+**/*.toc
+**/*.fls
+**/*.fdb_latexmk
+
+# Local environment
+.env
+.env.*
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+
+# Course reference material (kept locally, not published)
+23001524_DUONGQUANGHUY_BAITAP1.pdf
+Tham khao mau bao cao bai tap 1.pdf
+Yêu cầu BÀI TẬP 2.docx

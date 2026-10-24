@@ -1,0 +1,49 @@
+{
+  "dataset_hash": "f83d984747fe12e5e31aa71e794e71d40f30c6dc6711544cb54ec5e7a9f83660",
+  "n_records": 5113,
+  "date_min": "2010-01-01",
+  "date_max": "2023-12-31",
+  "expected_n_days": 5113,
+  "missing_dates": [],
+  "n_missing_dates": 0,
+  "duplicate_dates": 0,
+  "nulls": 0,
+  "invalid_values": 0,
+  "negative_values": 0,
+  "zero_values": 0,
+  "longest_zero_run": 0,
+  "unique_dates": 5113,
+  "sorted_chronologically": true,
+  "stats": {
+    "count": 5113,
+    "mean": 295.6839020692159,
+    "std_sample": 99.31513931680036,
+    "min": 94.39091925072448,
+    "p05": 120.17209524618535,
+    "p25": 218.41449147307256,
+    "median": 334.3992264587789,
+    "p75": 378.9796419211312,
+    "p95": 417.2308539676593,
+    "max": 457.4859835132164
+  },
+  "calendar": {
+    "n_years": 14,
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "n_leap_days": 3
+  }
+}

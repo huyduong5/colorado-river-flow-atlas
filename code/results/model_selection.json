@@ -1,0 +1,64 @@
+{
+  "run_id": "run-20261024T160504+0000",
+  "selection_metric": "mean_RMSE_7 trên Validation 2020-2021",
+  "target_mode": "delta",
+  "best_trial": {
+    "trial_id": 8,
+    "params": {
+      "learning_rate": 0.05,
+      "num_leaves": 7,
+      "max_depth": 3,
+      "min_child_samples": 40,
+      "reg_lambda": 0.0
+    },
+    "per_horizon": {
+      "1": {
+        "best_iteration": 15,
+        "RMSE": 2.849341636579179,
+        "MAE": 2.2548308478531,
+        "NSE": 0.9969301377813528
+      },
+      "2": {
+        "best_iteration": 1,
+        "RMSE": 4.067721540403947,
+        "MAE": 3.2176383641172803,
+        "NSE": 0.9937603924581347
+      },
+      "3": {
+        "best_iteration": 4,
+        "RMSE": 4.9732339387893125,
+        "MAE": 3.994928608626523,
+        "NSE": 0.9906986128983545
+      },
+      "4": {
+        "best_iteration": 6,
+        "RMSE": 5.704391894256254,
+        "MAE": 4.590758833649103,
+        "NSE": 0.9877977589458675
+      },
+      "5": {
+        "best_iteration": 14,
+        "RMSE": 6.4167513684827835,
+        "MAE": 5.109747752356941,
+        "NSE": 0.9846018874053043
+      },
+      "6": {
+        "best_iteration": 12,
+        "RMSE": 7.1428441909893685,
+        "MAE": 5.677202740072763,
+        "NSE": 0.9809701540935879
+      },
+      "7": {
+        "best_iteration": 15,
+        "RMSE": 7.837513108060894,
+        "MAE": 6.245591944434546,
+        "NSE": 0.9771603348894176
+      }
+    },
+    "mean_RMSE": 5.570256811080248,
+    "mean_MAE": 4.441528441587179,
+    "mean_NSE": 0.9874170397817171
+  },
+  "n_trials": 8,
+  "gru_status": "not_run_missing_torch"
+}

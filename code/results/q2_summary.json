@@ -1,0 +1,13 @@
+{
+  "threshold": 417.2308539676591,
+  "quantile": 0.95,
+  "mean": 295.6839020692159,
+  "std_sample": 99.31513931680036,
+  "z_threshold": 1.2238511946373725,
+  "n_days_high": 256,
+  "share_days_high": 0.0500684529630354,
+  "n_events": 15,
+  "longest_event_days": 90,
+  "max_event_peak": 457.485983513216,
+  "peak_year": 2017
+}

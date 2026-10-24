@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-20261024T160504+0000",
+  "dataset_hash": "f83d984747fe12e5e31aa71e794e71d40f30c6dc6711544cb54ec5e7a9f83660",
+  "created_at_utc": "2026-10-24T16:05:04+00:00",
+  "models": [
+    "lightgbm_direct",
+    "naive",
+    "seasonal_naive_365"
+  ],
+  "model_labels": {
+    "naive": "Naive persistence",
+    "seasonal_naive_365": "Seasonal Naive 365",
+    "lightgbm_direct": "LightGBM direct 7 (delta)"
+  },
+  "date_scopes": {
+    "observations": {
+      "start": "2010-01-01",
+      "end": "2023-12-31"
+    },
+    "test": {
+      "start": "2022-01-01",
+      "end": "2023-12-31"
+    }
+  },
+  "definitions": {
+    "threshold_scope": "2010-01-01..2023-12-31",
+    "threshold_quantile": 0.95,
+    "horizon_days": 7,
+    "metrics": [
+      "RMSE",
+      "MAE",
+      "NSE"
+    ]
+  },
+  "files": [
+    "daily.json",
+    "extremes.json",
+    "findings.json",
+    "forecast_illustrative.json",
+    "heatmap.json",
+    "manifest.json",
+    "metrics.json",
+    "monthly.json",
+    "predictions.json",
+    "seasonality.json",
+    "yearly.json",
+    "bao_cao.pdf",
+    "colorado_river_flow_processed.csv",
+    "extreme_events.csv",
+    "latex_overleaf.zip",
+    "metrics_by_horizon.csv",
+    "metrics_by_year.csv",
+    "metrics_overall.csv",
+    "monthly_stats.csv",
+    "predictions_long.csv",
+    "source_code.zip",
+    "yearly_stats.csv"
+  ]
+}

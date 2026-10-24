@@ -1,0 +1,4 @@
+model,split,mean_RMSE_7,mean_MAE_7,mean_NSE_7,pooled_RMSE,pooled_MAE,pooled_NSE,n_origins
+naive,validation,5.535150,4.424238,0.987592,5.760474,4.424238,0.987557,725
+seasonal_naive_365,validation,65.571724,59.949059,-0.612372,65.571899,59.949059,-0.612254,725
+lightgbm_direct,validation,5.570257,4.441528,0.987417,,,,725

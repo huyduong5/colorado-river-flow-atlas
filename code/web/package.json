@@ -1,0 +1,26 @@
+{
+  "name": "colorado-river-flow-atlas",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website tra cứu kết quả phân tích và dự báo lưu lượng sông Colorado, 2010-2023",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "node tests/smoke.mjs"
+  },
+  "dependencies": {
+    "echarts": "^6.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "5.9.3",
+    "vite": "^8.3.5"
+  }
+}

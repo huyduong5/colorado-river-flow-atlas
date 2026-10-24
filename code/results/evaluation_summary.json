@@ -1,0 +1,52 @@
+{
+  "test_origins": 724,
+  "n_predictions": 15204,
+  "models": [
+    "lightgbm_direct",
+    "naive",
+    "seasonal_naive_365"
+  ],
+  "metrics_test": [
+    {
+      "run_id": "run-20261024T160504+0000",
+      "model": "lightgbm_direct",
+      "split": "test",
+      "n_origins": 724,
+      "n_pairs": 5068,
+      "mean_RMSE_7": 5.325013235779706,
+      "mean_MAE_7": 4.168851733794808,
+      "mean_NSE_7": 0.8805016126530851,
+      "pooled_RMSE": 5.517348799623089,
+      "pooled_MAE": 4.168851733794808,
+      "pooled_NSE": 0.8807352760948526
+    },
+    {
+      "run_id": "run-20261024T160504+0000",
+      "model": "naive",
+      "split": "test",
+      "n_origins": 724,
+      "n_pairs": 5068,
+      "mean_RMSE_7": 5.307564083275928,
+      "mean_MAE_7": 4.155259639034435,
+      "mean_NSE_7": 0.8814163786203073,
+      "pooled_RMSE": 5.4962302960935645,
+      "pooled_MAE": 4.155259639034434,
+      "pooled_NSE": 0.8816465370073076
+    },
+    {
+      "run_id": "run-20261024T160504+0000",
+      "model": "seasonal_naive_365",
+      "split": "test",
+      "n_origins": 724,
+      "n_pairs": 5068,
+      "mean_RMSE_7": 60.48400569399262,
+      "mean_MAE_7": 46.44631917038389,
+      "mean_NSE_7": -13.332921163262606,
+      "pooled_RMSE": 60.48436231532967,
+      "pooled_MAE": 46.44631917038387,
+      "pooled_NSE": -13.333007856588376
+    }
+  ],
+  "illustrative_origin": "2023-12-31",
+  "gru_status": "not_run_missing_torch"
+}

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "colorado-flow"
+version = "0.1.0"
+description = "Phân tích và dự báo lưu lượng sông Colorado, 2010-2023"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "scipy>=1.13",
+  "scikit-learn>=1.4",
+  "statsmodels>=0.14",
+  "lightgbm>=4.0",
+  "matplotlib>=3.8",
+  "PyYAML>=6.0",
+  "pytest>=8.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+gru = ["torch>=2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

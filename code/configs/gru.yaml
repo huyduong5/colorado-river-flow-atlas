@@ -1,0 +1,14 @@
+# GRU direct 7 là hạng mục mở rộng. Môi trường hiện tại không có PyTorch,
+# nên cấu hình này chưa được chạy và không có kết quả GRU trong báo cáo.
+gru:
+  enabled: false
+  reason: "PyTorch không có trong môi trường; không tạo kết quả giả."
+  horizon: 7
+  window: 30
+  hidden_size: 64
+  num_layers: 2
+  dropout: 0.1
+  batch_size: 128
+  epochs: 60
+  learning_rate: 0.001
+  early_stopping_patience: 8

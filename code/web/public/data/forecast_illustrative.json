@@ -1,0 +1,58 @@
+[
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-01T00:00:00",
+    "horizon": 1,
+    "y_true": null,
+    "y_pred": 236.724986
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-02T00:00:00",
+    "horizon": 2,
+    "y_true": null,
+    "y_pred": 236.716382
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-03T00:00:00",
+    "horizon": 3,
+    "y_true": null,
+    "y_pred": 236.788556
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-04T00:00:00",
+    "horizon": 4,
+    "y_true": null,
+    "y_pred": 236.913805
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-05T00:00:00",
+    "horizon": 5,
+    "y_true": null,
+    "y_pred": 237.105538
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-06T00:00:00",
+    "horizon": 6,
+    "y_true": null,
+    "y_pred": 237.095071
+  },
+  {
+    "model": "lightgbm_direct",
+    "origin_date": "2023-12-31T00:00:00",
+    "target_date": "2024-01-07T00:00:00",
+    "horizon": 7,
+    "y_true": null,
+    "y_pred": 237.369399
+  }
+]

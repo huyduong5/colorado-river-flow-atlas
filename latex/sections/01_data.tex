@@ -1,0 +1,34 @@
+\section{Dữ liệu và thiết kế đánh giá}
+
+Chuỗi gốc gồm \DatasetN{} quan sát ngày, từ \DateMin{} đến \DateMax{}, không thiếu
+ngày, không trùng ngày và không có giá trị lưu lượng thiếu. Lưu lượng trung bình là
+\QMean{} m³/s, độ lệch chuẩn \QStd{} m³/s, nhỏ nhất \QMin{} m³/s và lớn nhất
+\QMax{} m³/s. Q95 tính trên toàn bộ chuỗi là \QHigh{} m³/s; có \NDaysHigh{} ngày vượt
+ngưỡng (\ShareHigh\% tương đương 5\%), tạo thành \NEvents{} đợt liên tiếp. Z tương
+đương ngưỡng này là \ZThreshold, không phải 1,645; vì vậy không dùng z $>$ 3 để thay
+cho định nghĩa Top 5\%.
+
+Dữ liệu được chia theo thời gian, không xáo trộn. Train dùng 2010--2019, Validation
+dùng 2020--2021 và Test dùng 2022--2023. Mỗi ngày gốc tạo 7 cặp dự báo D+1 đến D+7;
+cửa sổ mục tiêu không vượt khỏi tập tương ứng. Bảng~\ref{tab:split} tóm tắt số ngày
+gốc. Sau khi chọn mô hình, toàn bộ 2010--2021 được dùng để refit.
+
+\begin{table}[H]
+\centering
+\caption{Chia tập theo thời gian}
+\label{tab:split}
+\small
+\input{tables/split_summary}
+\end{table}
+
+Ba mô hình được so sánh. Naive persistence dùng $\hat y(t+h)=y(t)$. Seasonal Naive
+365 dùng giá trị cùng ngày của năm trước. LightGBM direct 7 dùng lag 1, 2, 3, 7, 14,
+28 ngày; trung bình và độ lệch chuẩn trượt 7, 14, 30, 90 ngày; biến lịch sin/cos của
+ngày trong năm và tháng; cùng biến lịch của ngày mục tiêu. Mục tiêu của LightGBM là
+chênh lệch $q(t+h)-q(t)$, sau đó cộng lại vào lưu lượng ngày gốc; đây vẫn là mô hình
+direct cho từng horizon. Siêu tham số được chọn trên Validation, Test chỉ dùng một lần
+để báo cáo.
+
+Với mỗi horizon, RMSE, MAE và NSE được tính từng ngày gốc; mean RMSE/MAE/NSE lấy
+trung bình trên 7 horizon, còn pooled tính trên toàn bộ cặp dự báo. NSE = 1 là hoàn
+hảo, NSE = 0 tương đương dự báo bằng trung bình và NSE âm là kém hơn mức trung bình.

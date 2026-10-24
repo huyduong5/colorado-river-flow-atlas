@@ -1,0 +1,57 @@
+{
+  "forecast_definition": "Tại gốc t, phát hành vector 7 nhãn q_(t+1)..q_(t+7).",
+  "horizon": 7,
+  "min_history_days": 30,
+  "splits": {
+    "train": {
+      "name": "train",
+      "target_start": "2010-01-01",
+      "target_end": "2019-12-31",
+      "origin_start": "2010-01-31",
+      "origin_end": "2019-12-24",
+      "n_origins": 3615,
+      "horizon": 7,
+      "target_min_from_origins": "2010-02-01",
+      "target_max_from_origins": "2019-12-31"
+    },
+    "validation": {
+      "name": "validation",
+      "target_start": "2020-01-01",
+      "target_end": "2021-12-31",
+      "origin_start": "2019-12-31",
+      "origin_end": "2021-12-24",
+      "n_origins": 725,
+      "horizon": 7,
+      "target_min_from_origins": "2020-01-01",
+      "target_max_from_origins": "2021-12-31"
+    },
+    "test": {
+      "name": "test",
+      "target_start": "2022-01-01",
+      "target_end": "2023-12-31",
+      "origin_start": "2021-12-31",
+      "origin_end": "2023-12-24",
+      "n_origins": 724,
+      "horizon": 7,
+      "target_min_from_origins": "2022-01-01",
+      "target_max_from_origins": "2023-12-31"
+    },
+    "refit": {
+      "name": "refit",
+      "target_start": "2010-01-01",
+      "target_end": "2021-12-31",
+      "origin_start": "2010-01-31",
+      "origin_end": "2021-12-24",
+      "n_origins": 4346,
+      "horizon": 7,
+      "target_min_from_origins": "2010-02-01",
+      "target_max_from_origins": "2021-12-31"
+    }
+  },
+  "checks": {
+    "train_target_max_lte_train_end": true,
+    "validation_targets_inside": true,
+    "test_targets_inside": true,
+    "no_random_shuffle": true
+  }
+}

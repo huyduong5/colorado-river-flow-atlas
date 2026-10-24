@@ -1,0 +1,26 @@
+\section*{Phụ lục A. Sai số theo từng horizon}
+
+Bảng~\ref{tab:horizon} chi tiết hóa kết quả Test của Naive persistence và LightGBM
+direct 7. Chạy lại pipeline với cấu hình trong mã nguồn và dữ liệu có mã băm bắt đầu
+\texttt{\DatasetHashShort} sẽ tái tạo các giá trị này.
+
+\begin{table}[H]
+\centering
+\caption{Sai số Test theo horizon (724 ngày gốc mỗi horizon)}
+\label{tab:horizon}
+\small
+\input{tables/metrics_by_horizon}
+\end{table}
+
+LightGBM chỉ nhỉnh hơn Naive ở D+1 (2,79 so với 2,79 m³/s sau làm tròn) và kém hơn
+từ D+2 trở đi. Điều này cho thấy mô hình học máy chưa tạo được lợi thế ổn định so với
+baseline persistence trên giai đoạn Test.
+
+\section*{Phụ lục B. Hồ sơ số}
+
+Mã nguồn, cấu hình, checkpoint, bảng kết quả và website tĩnh nằm trong
+\texttt{submission.zip}; \texttt{source\_code.zip} chứa mã và test;
+\texttt{latex\_overleaf.zip} chứa toàn bộ source LaTeX. Website chạy cục bộ theo
+\texttt{README.md}; báo cáo không gắn URL công khai chưa được kiểm chứng. Run hiện tại:
+\texttt{\RunId}; dữ liệu \texttt{\DatasetHashShort}; 14 test Python pass. PDF này được
+tái tạo từ cùng nguồn và được kiểm tra còn 5 trang.

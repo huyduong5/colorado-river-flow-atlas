@@ -1,0 +1,244 @@
+{
+  "summary": {
+    "threshold": 417.2308539676591,
+    "quantile": 0.95,
+    "mean": 295.6839020692159,
+    "std_sample": 99.31513931680036,
+    "z_threshold": 1.2238511946373725,
+    "n_days_high": 256,
+    "share_days_high": 0.0500684529630354,
+    "n_events": 15,
+    "longest_event_days": 90,
+    "max_event_peak": 457.485983513216,
+    "peak_year": 2017
+  },
+  "events": [
+    {
+      "event_id": "E01",
+      "start_date": "2017-06-02",
+      "end_date": "2017-06-02",
+      "duration_days": 1,
+      "peak_date": "2017-06-02",
+      "peak_flow": 419.436425,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E02",
+      "start_date": "2017-06-04",
+      "end_date": "2017-06-07",
+      "duration_days": 4,
+      "peak_date": "2017-06-05",
+      "peak_flow": 422.873527,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E03",
+      "start_date": "2017-06-10",
+      "end_date": "2017-06-10",
+      "duration_days": 1,
+      "peak_date": "2017-06-10",
+      "peak_flow": 418.283532,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E04",
+      "start_date": "2017-06-13",
+      "end_date": "2017-08-28",
+      "duration_days": 77,
+      "peak_date": "2017-07-06",
+      "peak_flow": 453.520902,
+      "n_exceedance_days": 77,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E05",
+      "start_date": "2017-09-02",
+      "end_date": "2017-09-05",
+      "duration_days": 4,
+      "peak_date": "2017-09-03",
+      "peak_flow": 423.706073,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E06",
+      "start_date": "2017-09-15",
+      "end_date": "2017-11-14",
+      "duration_days": 61,
+      "peak_date": "2017-10-11",
+      "peak_flow": 439.965174,
+      "n_exceedance_days": 61,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E07",
+      "start_date": "2018-01-09",
+      "end_date": "2018-01-09",
+      "duration_days": 1,
+      "peak_date": "2018-01-09",
+      "peak_flow": 417.657154,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E08",
+      "start_date": "2018-01-13",
+      "end_date": "2018-01-16",
+      "duration_days": 4,
+      "peak_date": "2018-01-14",
+      "peak_flow": 423.205088,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E09",
+      "start_date": "2018-01-19",
+      "end_date": "2018-01-19",
+      "duration_days": 1,
+      "peak_date": "2018-01-19",
+      "peak_flow": 417.912921,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E10",
+      "start_date": "2018-01-21",
+      "end_date": "2018-01-23",
+      "duration_days": 3,
+      "peak_date": "2018-01-23",
+      "peak_flow": 418.783772,
+      "n_exceedance_days": 3,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E11",
+      "start_date": "2018-02-04",
+      "end_date": "2018-02-07",
+      "duration_days": 4,
+      "peak_date": "2018-02-06",
+      "peak_flow": 420.850317,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E12",
+      "start_date": "2018-03-11",
+      "end_date": "2018-03-13",
+      "duration_days": 3,
+      "peak_date": "2018-03-12",
+      "peak_flow": 418.789176,
+      "n_exceedance_days": 3,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E13",
+      "start_date": "2019-11-29",
+      "end_date": "2019-11-29",
+      "duration_days": 1,
+      "peak_date": "2019-11-29",
+      "peak_flow": 417.39879,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E14",
+      "start_date": "2020-02-02",
+      "end_date": "2020-02-02",
+      "duration_days": 1,
+      "peak_date": "2020-02-02",
+      "peak_flow": 417.45747,
+      "n_exceedance_days": 1,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "event_id": "E15",
+      "start_date": "2020-02-04",
+      "end_date": "2020-05-03",
+      "duration_days": 90,
+      "peak_date": "2020-03-10",
+      "peak_flow": 457.485984,
+      "n_exceedance_days": 90,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    }
+  ],
+  "top5": [
+    {
+      "rank": 1,
+      "event_id": "E15",
+      "start_date": "2020-02-04",
+      "end_date": "2020-05-03",
+      "duration_days": 90,
+      "peak_date": "2020-03-10",
+      "peak_flow": 457.485984,
+      "n_exceedance_days": 90,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "rank": 2,
+      "event_id": "E04",
+      "start_date": "2017-06-13",
+      "end_date": "2017-08-28",
+      "duration_days": 77,
+      "peak_date": "2017-07-06",
+      "peak_flow": 453.520902,
+      "n_exceedance_days": 77,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "rank": 3,
+      "event_id": "E06",
+      "start_date": "2017-09-15",
+      "end_date": "2017-11-14",
+      "duration_days": 61,
+      "peak_date": "2017-10-11",
+      "peak_flow": 439.965174,
+      "n_exceedance_days": 61,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "rank": 4,
+      "event_id": "E05",
+      "start_date": "2017-09-02",
+      "end_date": "2017-09-05",
+      "duration_days": 4,
+      "peak_date": "2017-09-03",
+      "peak_flow": 423.706073,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    },
+    {
+      "rank": 5,
+      "event_id": "E08",
+      "start_date": "2018-01-13",
+      "end_date": "2018-01-16",
+      "duration_days": 4,
+      "peak_date": "2018-01-14",
+      "peak_flow": 423.205088,
+      "n_exceedance_days": 4,
+      "threshold_value": 417.230854,
+      "threshold_scope": "2010-01-01..2023-12-31"
+    }
+  ]
+}
