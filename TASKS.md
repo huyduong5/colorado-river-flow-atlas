@@ -34,8 +34,11 @@ hoàn tất nếu chưa có tệp/kết quả kiểm chứng.
 | P11.2 | ZIP source + kết quả | Hoàn tất | `deliverables/source_code.zip` |
 | P11.3 | Checksum deliverable | Hoàn tất | `cd deliverables && sha256sum -c SHA256SUMS` |
 | P11.4 | Secret scan | Hoàn tất | Không có `.env`, key, token, mật khẩu thật |
-| P11.5 | Publish website công khai | Chưa thực hiện | Chỉ có build local + hướng dẫn; không ghi URL chưa có vào PDF |
+| P11.5 | Publish website công khai | Hoàn tất | GitHub Pages: https://huyduong5.github.io/colorado-river-flow-atlas/; workflow deploy pass; HTTP 200 |
 | P11.6 | Clean-room reproduction | Hoàn tất | venv mới từ `requirements.lock.txt`; 14 test pass; pipeline tái tạo đúng metrics/predictions |
+| P12.1 | Tạo GitHub public | Hoàn tất | https://github.com/huyduong5/colorado-river-flow-atlas |
+| P12.2 | GitHub Actions deploy Pages | Hoàn tất | `.github/workflows/deploy-pages.yml`; run 40113065315 pass |
+| P12.3 | QR website và GitHub | Hoàn tất | `latex/assets/qr_website.png`, `latex/assets/qr_github.png` |
 
 ## Ghi chú
 
